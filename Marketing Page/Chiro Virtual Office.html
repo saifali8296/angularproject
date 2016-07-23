@@ -1,0 +1,934 @@
+
+<!DOCTYPE html>
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <!-- Basic Page Needs
+        ================================================== -->
+    <meta charset="utf-8">
+    <title>Chiro Virtual Office</title>
+   <!-- Favicons-->
+    <link rel="shortcut icon" href="/resources/images/favicon-ehr.ico" type="image/x-icon"/>
+
+    <!-- Mobile Specific Metas
+        ================================================== -->
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">    
+   
+  <!-- Config JS File -->
+ <script type="text/javascript" src="/resources/js/validation/conf.js"></script> 
+   <script type="text/javascript" src="/resources/js/jquery.min.js"></script> 
+   <script type="text/javascript" src="/resources/js/transition.js"></script> 
+   <script src="/resources/js/bootstrap-formhelpers.js" type="text/javascript"></script>
+    <!-- CSS
+        ================================================== -->
+        
+    <!-- Bootstrap Helper -->
+    <link href="/resources/css/bootstrap-formhelpers.css" rel="stylesheet">
+	<link href="/resources/css/bootstrap-formhelpers.min.css" rel="stylesheet">
+	
+    <link rel="stylesheet" type="text/css" href="/resources/css/calendar/sample.css">
+    <!-- Bootstrap  -->
+    	
+<link href="/resources/css/calendar/fullcalendar.print.css"
+	rel="stylesheet" type="text/css" media='print' />
+
+    <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/resources/css/bootstrap.css">
+    <!-- web font  -->
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,800" rel="stylesheet" type="text/css">
+    <!-- plugin css  -->
+    <link type="text/css" rel="stylesheet" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/resources/css/camera.css" media="screen" />
+   <!--Select filter-->
+    <link rel="stylesheet" type="text/css" href="/resources/css/selectbox/select-filter.css" media="screen" />
+   
+     <!-- datetime picker -->
+    
+    <!--Data tables-->
+    <link rel="stylesheet" type="text/css" href="/resources/css/datatables/datatables.css" media="screen" />
+    
+    <!--File Upload-->
+    <!-- <link href="resources/css/fileupload/file-upload.css" rel="stylesheet"> <link type="text/css" rel="stylesheet" href="/resources/fonts/font-awesome-4.1.0/css/font-awesome.min.css"> -->
+
+    <!-- Custom css -->
+  <link type="text/css" rel="stylesheet" href="/resources/css/outline.css">
+     <link type="text/css" id="colors" rel="stylesheet" href="/resources/css/colors.css"> 
+    <!--[if lt IE 9]><script src="js/html5.js"></script> <![endif]-->
+    
+    <!--telephone mask-->
+    
+    
+<!-- spinner -->
+<script type="text/javascript"
+	src="/resources/js/spinner/spinner.js"></script>
+<script type="text/javascript"
+	src="/resources/js/validation/spinnersettings.js"></script> 
+
+    <!--filter list-->
+<script type='text/javascript'>//<![CDATA[
+
+                             
+       $(document).ready(function(){
+          
+    	   $("#modal-text1-add").click(function(){
+               $("#time-slots").slideDown("slow");
+               $("#modalBody-add").css({
+                  'min-height':'400px'
+               });
+               
+           });
+    	   $("#modal-text1").click(function(){
+               $("#time-reslots").slideDown("slow");
+               $("#modalBody").css({
+                  'min-height':'400px'
+               });
+               
+           });
+    	   $("#time-reslots").hide();
+    	   $("#time-slots").hide();
+       });
+       
+       $(window).load(function(){
+            $("#choose").click(function() {
+                $("#my_file").click();
+            });
+            
+            	
+              
+
+                
+                $( "#search" ).click(function() {
+                    $( "#opensearch" ).slideToggle();
+                });
+                  
+
+                
+                var readURL = function(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('.profile-pic').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+
+                $("#my_file").on('change', function(){
+                    readURL(this);
+                });
+
+
+            });
+
+
+       //]]>
+
+    </script>
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        	
+            
+            $("#gender").select2({minimumResultsForSearch: -1 });
+            $("#marital-status").select2({minimumResultsForSearch: -1 });
+            $("#employment").select2({minimumResultsForSearch: -1 });
+            $('#addnew').tooltip();
+            $('#search').tooltip();
+            $('.tooltipsclass').tooltip();
+
+
+
+            $(".share-btn").mouseenter(function() {
+                setTimeout(function() {
+                    $(".item-menu").addClass("visible")
+                }, 500);
+            });
+            $(".share-btn").mouseleave(function() {
+                setTimeout(function() {
+                    $(".item-menu").removeClass("visible")
+                }, 500);
+            });
+            $(".item-menu").hover(function() {
+                $(".item-menu").addClass("visible")
+            });
+            $(".item-menu").mouseleave(function() {
+                setTimeout(function() {
+                    $(".item-menu").removeClass("visible")
+                }, 500);
+            });
+            $(".container-item").hover(function() {
+                setTimeout(function() {
+                    $(".container-item").css("z-index","1000")
+                }, 500);
+            });
+        } );
+
+
+    </script>
+  
+</head>
+<body>
+<!-- Primary Page Layout
+ ================================================== -->
+<!-- globalWrapper -->
+<div id="globalWrapper" >
+    <!-- header -->
+    <header id="mainHeader" class="clearfix">
+        <div class="navbar navbar-fixed-top" style="display: none">
+            <div class="navbar-inner preHeader">
+                <div class="container">
+                    <div class="row-fluid">
+                        <div class="span6 clearfix">
+                            <ul class="quickMenu">
+                                <li><a href="#" class="linkLeft">Site map</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><span id="logged">Hello user  <!--<span class="badge badge-success">3</span>--></span></li>
+                            </ul>
+                        </div>
+                        <div class="span6 clearfix">
+                            <ul class="socialNetwork">
+                                <li><a href="#" class="fa fa-rss socialIcon tips"  title="Our rss feed"><span>rss feed</span></a></li>
+                                <li><a href="#" class="fa fa-facebook socialIcon tips"  title="follow us on Facebook"><span>facebook</span></a></li>
+                                <li><a href="#" class="fa fa-twitter socialIcon tips"  title="follow us on Twitter"><span>twitter</span></a></li>
+                                <li><a href="#" class="fa fa-google-plus socialIcon tips"  title="follow us on Google +"><span>google +</span></a></li>
+                                <li><a href="#" class="fa fa-instagram socialIcon tips"  title="follow us on Instagram"><span>instagram</span></a></li>
+                                <li><a href="#" class="fa fa-linkedin socialIcon tips"  title="follow us on Linkedin"><span>linkedin</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-fixed-top mainNav"style="margin-top: 0px">
+            <div class="navbar-inner">
+                <div class="container"> <a href="#" class="brand">
+                        <img src="/resources/images/logo.png" alt="EHR"/></a>
+                    <nav id="mainMenu">
+                        <ul>
+                         <li> <a href="ContactUs" class="firstLevel"><i class="fa fa-shopping-cart fa-fw" style="font-size: 110%;"></i> Order Now</a></li>
+                            <li><a href="index" class="firstLevel " ><i class="fa fa-home fa-fw" style="font-size: 110%;"></i> Home</a></li>
+                            
+                             </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+<style>
+.buttonClass{
+position: absolute;width: 22em;height: 5em;
+}
+.licolor{
+color: green;
+font-weight: bold;
+}
+.home-rectagle-circle-rect1{
+	padding:20px 75px 0px 0px;
+	font-size:18px;
+	font-style:italic;
+	text-align:right;
+}
+.home-rectagle-circle-rect{
+	font-size:18px;
+	padding:20px 0px 0px 75px;
+	font-style:italic;
+}
+.margin-top-50px{
+	margin-top:50px
+}
+q {
+    display: inline;
+}
+ 
+q:before {
+    content: open-quote;
+}
+ 
+q:after {
+    content: close-quote;
+}
+h1.themecolor-bg2{
+	font-size:50px;
+	color:#fff;
+}
+p.themecolor-bg2{
+	font-size:30px;
+	color:#fff;
+	font-weight:bold;
+	background-color:transparent;
+}
+.home-bulle{
+	height:220px;
+}
+</style>
+<link href='http://daneden.github.io/animate.css/animate.min.css' rel='stylesheet'>
+<script language="javascript">
+    $(function() {
+        $("#ref1").hover(function() {
+            animate("#jump1", 'bounce');
+            return false;
+        });
+
+    });
+
+    function animate(element_ID, animation) {
+        $(element_ID).addClass(animation);
+        var wait = window.setTimeout( function(){
+                $(element_ID).removeClass(animation)}, 1300
+        );
+    }
+    $(function() {
+
+        $("#ref2").hover(function() {
+            animate("#jump2", 'bounce');
+            return false;
+        });
+    });
+
+    function animate(element_ID, animation) {
+        $(element_ID).addClass(animation);
+        var wait = window.setTimeout( function(){
+                $(element_ID).removeClass(animation)}, 1300
+        );
+    }
+    $(function() {
+
+        $("#ref3").hover(function() {
+            animate("#jump3", 'bounce');
+            return false;
+        });
+    });
+
+    function animate(element_ID, animation) {
+        $(element_ID).addClass(animation);
+        var wait = window.setTimeout( function(){
+                $(element_ID).removeClass(animation)}, 1300
+        );
+    }
+    $(function() {
+
+        $("#ref4").hover(function() {
+            animate("#jump4", 'bounce');
+            return false;
+        });
+    });
+
+    function animate(element_ID, animation) {
+        $(element_ID).addClass(animation);
+        var wait = window.setTimeout( function(){
+                $(element_ID).removeClass(animation)}, 1300
+        );
+    }
+</script>
+
+<!-- slider --><div class="mobile-only"><br/><br/><br/><br/><br/><br/><br/><br/></div>
+<section  id="sliderWrapper">
+    <!-- background slider dark bloc -->
+    <div class="fullwidthbanner-container">
+        <div class="fullwidthbanner" >
+            <ul>
+                <li data-transition="fade" data-slotamount="1"  data-masterspeed="2000">
+                    <img src="/resources/images/slider/bg-1.jpg" alt="slide"/>
+                    <!--<div class="caption lfr" data-x="0" data-y="20" data-speed="2000" data-start="1000" data-easing="easeOutExpo">
+                        <img src="resources/images/bgpentegon-2.png" alt="slide" class="ie8PngFix"/>
+                    </div>
+
+                     <div class="caption lfl" data-x="0" data-y="250" data-speed="900" data-start="200" data-easing="easeOutBack">
+                        <img src="resources/images/umbrella-1.png" alt="slide" class="ie8PngFix"/>
+                    </div>
+                    <div class="caption lfl" data-x="100" data-y="330" data-speed="900" data-start="200" data-easing="easeOutBack">
+                        <img src="resources/images/umbrella-2.png" alt="slide" class="ie8PngFix"/>
+                    </div>
+                    <div class="caption lfr" data-x="110" data-y="70" data-speed="700" data-start="700" data-easing="easeOutExpo">
+                        <img src="resources/images/happyman.png" alt="slide" class="ie8PngFix"/>
+                    </div> -->
+
+                    <div class="caption sft" data-x="0" data-y="100" data-speed="300" data-start="1000" data-easing="easeOutExpo" >
+                        <h1 class="themecolor-bg2"> Welcome <br/> Chiro Virtual Office Members! </h1>
+                    </div>
+                    <div class="caption sft" data-x="0" data-y="180" data-speed="300" data-start="2000" data-easing="easeOutExpo">
+                        <p class="themecolor-bg2"><br/> The future of healthcare technology<br/> at your fingertips! </p>
+                    </div>
+                    <!-- <div class="caption sft" data-x="70" data-y="250" data-speed="200" data-start="2500" data-easing="easeOutExpo">
+                        <p class="themecolor-bg2"> Everything for family </p>
+                    </div> -->
+                </li>
+
+
+                <li data-transition="random-premium" data-slotamount="1">
+                    <img src="/resources/images/slider/bg-3.jpg" alt="slide"/>
+                    <!-- <div class="caption lfr" data-x="80" data-y="130" data-speed="700" data-start="0" data-easing="easeOutExpo">
+                        <img src="resources/images/slide-2-woman.png" alt="slide" class="ie8PngFix"/>
+                    </div>
+                    <div class="caption lfl" data-x="790" data-y="10" data-speed="700" data-start="0" data-easing="easeOutExpo">
+                        <img src="resources/images/bgpentegon-3.png" alt="slide" class="ie8PngFix"/>
+                    </div>
+                    <div class="caption lfl" data-x="790" data-y="55" data-speed="700" data-start="0" data-easing="easeOutExpo">
+                        <img src="resources/images/man-5.png" alt="slide" class="ie8PngFix"/>
+                    </div> 
+                    <div class="caption lfr" data-x="360" data-y="280" data-speed="700" data-start="300" data-easing="easeInExpo" >
+                        <h2 class="themecolor-bg"><i class="fa fa-arrow-circle-left"></i>Fabulous Features</h2>
+                    </div>
+                    <div class="caption sfl" data-x="400" data-y="100" data-speed="700" data-start="800" data-easing="easeInExpo" >
+                        <h2 class="themecolor-bg"><i class="fa fa-arrow-circle-right"></i>Excellent Planning</h2>
+                    </div>-->
+                    <div class="caption sfl" data-x="0" data-y="90" data-speed="1000" data-start="800" data-easing="easeInExpo" >
+                        <h1 class="themecolor-bg2">We value your . . .</h1>
+                    </div>
+                    <!-- <div class="caption sfl" data-x="830" data-y="180" data-speed="1000" data-start="800" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">We value your</p>
+                    </div> -->
+                    <div class="caption sfr" data-x="820" data-y="170" data-speed="1000" data-start="1600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">loyalty and commitment</p>
+                    </div>
+                    <div class="caption sfr" data-x="820" data-y="220" data-speed="1000" data-start="2600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">to cutting edge</p>
+                    </div>
+                    <div class="caption sfr" data-x="820" data-y="270" data-speed="1000" data-start="3600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">software development</p>
+                    </div>
+                </li>
+
+                <li data-transition="3dcurtain-vertical" data-slotamount="1">
+                    <img src="resources/images/slider/bg-2.jpg" alt="slide"/>
+                    <!-- <div class="caption lfl" data-x="0" data-y="0" data-speed="900" data-start="200"  data-end="3000" data-easing="easeOutBack">
+                        <img src="resources/images/slide-3-woman.png" alt="slide" class="ie8PngFix"/>
+                    </div> -->
+                   <div class="caption sfl" data-x="0" data-y="90" data-speed="1000" data-start="800" data-easing="easeInExpo" >
+                        <h1 class="themecolor-bg2">A smarter way of . . .</h1>
+                    </div>
+                    <!-- <div class="caption lfl" data-x="480" data-y="304" data-speed="500" data-start="900" data-end="2800" data-easing="easeInExpo" >
+                        <h3 class="themecolor-text"><i class="fa fa-arrow-circle-right"></i>Some text comes here</h3>
+                    </div>
+                    <div class="caption lfl" data-x="0" data-y="80" data-speed="700" data-start="3300" data-easing="easeOutExpo">
+                        <img src="resources/images/man-2.png" alt="slide" class="ie8PngFix"/></div>
+                    <div class="caption sft small_text" data-x="481" data-y="220" data-speed="300" data-start="3400" data-easing="easeOutExpo" >
+                        <h2 class="themecolor-bg">Some text comes here</h2>
+                    </div>
+                    <div class="caption lfr" data-x="481" data-y="304" data-speed="500" data-start="3600" data-easing="easeInExpo" >
+                        <p class="themecolor-text">Some text comes here<p> 
+                    </div>-->
+                    <div class="caption sfr" data-x="900" data-y="170" data-speed="1000" data-start="1600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Appointments</p>
+                    </div>
+                    <div class="caption sfr" data-x="900" data-y="220" data-speed="1000" data-start="2600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Treatments</p>
+                    </div>
+                    <div class="caption sfr" data-x="900" data-y="270" data-speed="1000" data-start="3600" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Reports</p>
+                    </div>
+
+                </li>
+                <li data-transition="fade" data-slotamount="1">
+                    <img src="resources/images/slider/bg-4.jpg" alt="slide"/>
+                    <!-- <div class="caption lfl" data-x="550" data-y="100" data-speed="900" data-start="0" data-easing="easeOutBack">
+                        <img src="resources/images/boy-1.png" alt="slide" class="ie8PngFix"/></div> -->
+                    <div class="caption sft small_text" data-x="770" data-y="49" data-speed="300" data-start="200" data-easing="easeOutExpo" >
+                        <h1 class="themecolor-bg2">Improved . . .</h1>
+                    </div>
+                    <div class="caption lfl" data-x="770" data-y="130" data-speed="500" data-start="500" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Patient File Management</p>
+                    </div>
+                    <div class="caption lfl" data-x="770" data-y="180" data-speed="500" data-start="700" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Patient Form Management</p>
+                    </div>
+                    <div class="caption lfl" data-x="770" data-y="230" data-speed="500" data-start="900" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Appointments</p>
+                    </div>
+                    <div class="caption lfl" data-x="770" data-y="280" data-speed="500" data-start="1100" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Treatment</p>
+                    </div>
+                    <div class="caption lfl" data-x="770" data-y="330" data-speed="500" data-start="1300" data-easing="easeInExpo" >
+                        <p class="themecolor-bg2">Billing Details</p>
+                    </div>
+                    <!-- <div class="caption sfb" data-x="50" data-y="311" data-speed="300" data-start="1800" data-easing="easeOutExpo" >
+                        <a href="#" target="_blank" class="btn">Read Mo re</a> </div> -->
+                </li>
+            </ul>
+            <div class="tp-bannertimer"></div>
+        </div>
+    </div>
+</section>
+
+<!-- slider -->
+<!-- topBox -->
+<section class="topBox color1"style="margin-top: -30px !important;">
+    <div class="container" style="margin-top: 0px !important;">
+        <div class="row"style="margin-top: 0px !important;">
+            <div class="col-md-3">
+                <center><div class="home-fa-circle"><i class="fa fa-male fa-fw fa-3x"></i></div></center>
+                <p class="home-bulle"align="justify">
+                        <span>
+                        Please login below if you are the owner or administrator of 
+                        multiple clinics and have super access. Each clinic will
+                         appear by name and location for you to click.
+                        </span>
+                </p>
+            
+            <button class="btn btn-primary btn-sm buttonClass " 
+			onclick="window.location='user-login'">
+			<span class="fa fa-male " aria-hidden="true"></span>&nbsp;&nbsp;<b><big>Super Admin Login</big></b>
+			</button>
+           
+            </div>
+            <div class="col-md-3">
+                <center><div class="home-fa-circle"><i class="fa fa-user fa-fw fa-3x"></i></div></center>
+                <p class="home-bulle"align="justify">
+                        <span>
+                        Please login below if you are the owner or 
+                        administrator of one clinic, or if you have the 
+                        direct login information of a particular clinic.
+                        </span>
+                </p>
+                 <button class="btn btn-primary btn-sm buttonClass" 
+			onclick="window.location='user-login'">
+			<span class="fa fa-user" aria-hidden="true"></span>&nbsp;&nbsp;<b><big>Clinic Admin Login</big></b>
+			</button>
+            </div>
+            <div class="col-md-3">
+                <center><div class="home-fa-circle"><i class="fa fa-user-md fa-fw fa-3x"></i></div></center>
+                <p class="home-bulle"align="justify">
+                        <span>
+                        Please login below if you are the Physician of one particular 
+                        clinic and wish to access patient files or treat new 
+                        or existing patients at your clinic.
+                        </span>
+                </p>
+               <button class="btn btn-primary btn-sm buttonClass" 
+			onclick="window.location='user-login'">
+			<span class="fa fa-user-md" aria-hidden="true"></span>&nbsp;&nbsp;<b><big>Doctor Login</big></b>
+			</button>
+            </div>
+            <div class="col-md-3">
+                <center><div class="home-fa-circle"><i class="fa fa-users fa-fw fa-3x"></i></div></center>
+                <p class="home-bulle"align="justify">
+                        <span>
+                        Please login below if you are a patient of one of our membership 
+                        clinics and have been treated at one of our facilities. 
+                        The nurse or receptionist provided a username and login 
+                        for you at your first visit.
+                        </span>
+                </p>
+                <button class="btn btn-primary btn-sm buttonClass" 
+			onclick="window.location='user-login'">
+			<span class="fa fa-users" aria-hidden="true"></span>&nbsp;&nbsp;<b><big>Patient Login</big></b>
+			</button>
+            </div>
+	 </div>
+        <br> <br> <br>
+    </div>
+</section>
+<!-- topBox -->
+<!-- content -->
+<section id="content" class="home">
+    <!--3 cols-->
+    <section class="color1 slice">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-md-5" style="" >
+
+
+                    <div class="home-rectagle-circle-circ1"><i class="fa fa-sitemap fa-fw fa-2x animated" id="jump1"></i> </div>
+                    <div class="home-rectagle-circle-rect1"id="ref1">
+                        A network of top physicians	
+                    </div>
+                    <div class="margin-top-80px">
+                    <div class="home-rectagle-circle-circ1"><i class="fa fa-file-text-o fa-fw fa-2x animated" id="jump2"></i> </div>
+                    <div class="home-rectagle-circle-rect1" id="ref2">
+                        Electronic billing at your fingertips	
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-2" style="padding: 0px">
+                    <img src="resources/images/doctor-home.jpg"/>
+                </div>
+                <div class="col-md-5">
+                	<div class="home-rectagle-circle-circ pull-left"><i class="fa fa-level-up fa-fw fa-2x animated"id="jump4"></i> </div>
+                    <div class="home-rectagle-circle-rect"id="ref4">
+                        Continual app improvements
+                    </div>
+                    <div class="home-rectagle-circle-circ pull-left"><i class="fa fa-dollar fa-fw fa-2x animated"id="jump3"></i> </div>
+                    <div class="home-rectagle-circle-rect" id="ref3">
+                        Automatic update of accounts receivable
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--3 cols-->
+
+    <section class="slice color1 roundedShadow">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="blocFocus color1">
+                        <h2><span class="licolor tooltipsclass">Updates and Improvements</span> </h2>
+						<ul style="list-style: none;">
+							
+							<li><span class="licolor tooltipsclass" style="text-decoration:none"><i class="fa fa-hand-o-right "></i> Patient File Management</span></li>
+								<ul>
+								<li >Patient file Management is a well structured and detailed patient management system with better UI</li>
+								</ul>
+							<li><span class="licolor tooltipsclass" style="text-decoration:none"><i class="fa fa-hand-o-right "></i> Appointments</span></li>
+								<ul>
+								<li >Calendar model based appointment features makes it easy to book appointment. Doctor can view and give the appointment as per the patient needs.</li>
+								</ul>
+							<li><span class="licolor tooltipsclass" style="text-decoration:none"><i class="fa fa-hand-o-right "></i> Patient Form Management</span></li>
+								<ul>
+								<li >It contains every forms being used in the clinic and stored.</li>
+								</ul>
+							<li><span class="licolor tooltipsclass" style="text-decoration:none"><i class="fa fa-hand-o-right "></i> Treatment</span></li>
+								<ul>
+								<li >Clinic admin and doctors can view the full history and Health records of the patient.</li>
+								</ul>
+							<li><span class="licolor tooltipsclass" style="text-decoration:none"><i class="fa fa-hand-o-right "></i> Billing Details</span></li>
+								<ul>
+								<li >Billing details have the option to add new CPT category with descriptions</li>
+								</ul>
+						</ul>
+                    </div>
+                </div>
+             
+                <div class="col-md-4">
+                    <h2>Latest news </h2>
+                    <ul class="media-list newsList">
+                        <li class="media"> 
+                        <!-- <a class="pull-left" href="#">
+                            <div class="newsDate">
+                                <h4>12</h4>
+                                <span>Oct.</span></div>
+                        </a> -->
+                            <div class="media-body">
+                                <h3 class="licolor">The new ICD-10 deadline is Oct. 1, 2015</h3>
+                                <p>We have a deadline. The Centers for Medicare and Medicare Services (CMS) released a statement that sets the deadline for ICD-10 implementation at <strong>Oct. 1, 2015.</strong> </p>
+                                <!-- <a href="" class="readMore"><i class="icon-right-circle"></i>read more</a> </div> -->
+                        </li>
+                        <li class="media">
+                       <!--  <a class="pull-left" href="#">
+                            <div class="newsDate">
+                                <h4>23</h4>
+                                <span>Dec.</span></div>
+                        </a> -->
+                            <div class="media-body">
+                                <h3 class="licolor">Government Electronic Medical Records Deadline!</h3>
+                                <p>For physicians who either have not adopted certified EHR / EMR systems or cannot demonstrate <q>meaningful use</q> by the EMR deadline in 2015, Medicare reimbursements will be reduced by 1%. The deduction rate increases in subsequent years by 2% in 2016, 3% in 2017, 4% in 2018, and up to 95% depending on future adjustments.</p>
+                                <!-- <a href="" class="readMore"><i class="icon-right-circle"></i>read more</a> </div> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- row-->
+        </div>
+        <!-- container-->
+    </section>
+
+
+    <!-- download -->
+    <section class="slice mb40">
+        <div  class="container">
+            <div class="row-fluid callToActionBoxed color4">
+                <div class="col-md-8">
+                    <div class="ctaText">
+                        <h3>Locate a clinic near you!</h3>
+                        <p>They would simply enter their address in the box and it will only show the clinic nearest the prospective patient's address.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                <button class="btn btn-primary btn-lg margin-top-50px" 
+			onclick="window.location='listclinic'">
+			<span class="fa fa-arrow-circle-down" aria-hidden="true"></span>&nbsp;&nbsp;<b><big>Get in to know more</big></b>
+			</button>
+                    <!-- <div class="">
+                        <a href="about-us.php" class="btn btn-primary btn-sm buttonClass" title=""><i class="fa fa-arrow-circle-down"></i>Get in to know more</a> </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- download -->
+</section>
+<!-- content -->
+<script type="text/javascript" src="resources/js/jquery.themepunch.plugins.min.js"></script>
+<style>
+	.back{
+		padding-left:2px;
+	}
+</style>
+<!-- footer -->
+<footer class="hidden-print">
+    <section id="mainFooter">
+        <div id="backToTop">
+            <div class="container" >
+                <a href="#" class="iconWrapper"><i class="fa fa-arrow-circle-up back"></i></a> </div>
+        </div>
+        <div class="container" id="footer">
+            <div class="row">
+            
+                <div class="col-md-4 testimonialWidget" >
+                <center><h3>Get Order</h3>
+                    <a href="ContactUs"><img src="/resources/images/contact/order-button.png"/></a> 
+                    </center><br/>
+                    <h3 class="text-center">Follow Us On</h3>
+				
+
+
+                    <!--<h3>Social Media</h3>-->
+                    <div class="col-xs-3 col-md-3" style="padding: 5px 0px 20px 1px">
+                        <!-- <a class="social-ehr " id="twitter" href="#" title="" >
+                            <div class="icon"> <i class="fa fa-twitter fa-fw fa-2x"></i> </div>
+
+                            <div class="shutter_frame">
+                                <div class="shutter">
+                                    <div class="number">1189</div>
+                                    <div class="bar"></div>
+                                    <div class="text">Share</div>
+                                </div>
+                            </div>
+                        </a> -->
+                        <a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fwww.chirovirtualoffice.com"
+  data-counturl="http://www.chirovirtualoffice.com" data-count="vertical">Tweet</a>
+                    </div>
+
+                    <div class="col-xs-3 col-md-3" style="padding: 5px 1px 20px 1px">
+                   <!--  <a class="social-ehr" id="google" href="#" title="">
+                        <div class="icon"> <i class="fa fa-google-plus fa-fw fa-2x"></i> </div>
+
+                        <div class="shutter_frame">
+                            <div class="shutter">
+                                <div class="number">421</div>
+                                <div class="bar"></div>
+                                <div class="text">+1</div>
+                            </div>
+                        </div>
+                    </a> -->
+                    <div class="g-plusone" data-url="http://www.chirovirtualoffice.com" data-size="tall"></div>
+                        </div>
+                        <div class="col-xs-3 col-md-3" style="padding: 5px 1px 20px 0px">
+                   <!--  <a class="social-ehr pull-right" id="facebook" href="#" title="" style="margin-right: 0px;">
+                        <div class="icon"> <i class="fa fa-facebook fa-fw fa-2x"></i> </div>
+
+                        <div class="shutter_frame">
+                            <div class="shutter">
+                                <div class="number">973</div>
+                                <div class="bar"></div>
+                                <div class="text">Like</div>
+                            </div>
+                        </div>/ .shutter_frame
+                    </a> -->
+                     <div class="fb-like" data-href="http://www.chirovirtualoffice.com" data-layout="box_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                    </div>
+                    <div class="col-xs-3 col-md-3" style="padding: 5px 0px 20px 1px">
+                       <!--  <a class="social-ehr " id="linkedin" href="#" title="" >
+                            <div class="icon"> <i class="fa fa-linkedin fa-fw fa-2x"></i> </div>
+
+                            <div class="shutter_frame">
+                                <div class="shutter">
+                                    <div class="number">1189</div>
+                                    <div class="bar"></div>
+                                    <div class="text">follows</div>
+                                </div>
+                            </div>
+                        </a> -->
+                        <script type="IN/Share" data-url="http://www.chirovirtualoffice.com" data-counter="top"></script>
+                      </div>
+                    <!-- <div class="label-text text-green" style="font-size: 15px !important;">Subscribe to our newsletter</div>
+                    <div class="input-group" style=" height: 25px !important;margin-bottom: 20px">
+                                                        <span class="input-group-addon white-color-bg" >
+                                                        <i class="glyphicon glyphicon-pencil"></i>
+                                                        </span>
+                        <input type="text" class="form-control" placeholder="Email ID">
+                                                        <span class="input-group-btn" style="">
+                                                        <button class="btn" type="button" style="margin-bottom: 0;padding: 5.5px 10px!important">
+                                                            Go
+                                                        </button>
+                                                        </span>
+                    </div> -->
+                </div>
+                <div class="col-md-4 newsWidget" >
+                    <h3 class="text-center">Mobile App</h3>
+                    <!-- <a href="#" class="tag-ehr">high resolution</a>
+                    <h4> <i class="fa fa-arrow-circle-right"></i> Get an instant appointment</h4>
+                    <h4> <i class="fa fa-arrow-circle-right"></i> Become a Registered Patient</h4>
+                    <h4> <i class="fa fa-arrow-circle-right"></i> Select your nearby & best clinic</h4>
+                    <h4> <i class="fa fa-arrow-circle-right"></i> Select your clinic by doctor's Qualification</h4> -->
+                    <center><img src="/resources/images/logo.png" alt="" />
+                    <p style="margin-bottom: 10px">Download Our Mobile App for quick access</p>
+                    <img src="/resources/images/contact/appstore.png"/></center>
+                </div>
+            <!--     <div class="col-md-3 newsWidget">
+                    <h3>Latest Entered Clinics</h3>
+                    <ul style="border: 1px solid #333333;padding-top: 10px">
+                        <li>
+                            <h4><i class="fa fa-hospital-o fa-fw fa-2x"></i><span> Global Poly clinic</span></h4>
+                            <h4 style="border-bottom: 1px solid #333;padding-right: 3px "><i class="fa fa-map-marker fa-fw fa-2x"></i><span> Texas City</span>
+                                <a href="#"style="text-decoration: none;"class="pull-right"><i class="fa fa-arrow-circle-right"></i> View</a></h4>
+                        </li>
+                        <li>
+                            <h4><i class="fa fa-hospital-o fa-fw fa-2x"></i><span> Global Poly clinic</span></h4>
+                            <h4 style="border-bottom: 1px solid #333;padding-right: 3px  "><i class="fa fa-map-marker fa-fw fa-2x"></i><span> Texas City</span>
+                                <a href="#"style="text-decoration: none;"class="pull-right"><i class="fa fa-arrow-circle-right"></i> View</a></h4>
+                        </li>
+                        <li>
+                            <h4><i class="fa fa-hospital-o fa-fw fa-2x"></i><span> Global Poly clinic</span></h4>
+                            <h4 style="border-bottom: 1px solid #333;padding-right: 3px  "><i class="fa fa-map-marker fa-fw fa-2x"></i><span> Texas City</span>
+                                <a href="#"style="text-decoration: none;"class="pull-right"><i class="fa fa-arrow-circle-right"></i> View</a></h4>
+                        </li>
+                        <li>
+                            <h4><i class="fa fa-hospital-o fa-fw fa-2x"></i><span> Global Poly clinic</span></h4>
+                            <h4 style="border-bottom: 1px solid #333;padding-right: 3px  "><i class="fa fa-map-marker fa-fw fa-2x"></i><span> Texas City</span>
+                                <a href="#"style="text-decoration: none;"class="pull-right"><i class="fa fa-arrow-circle-right"></i> View</a></h4>
+                        </li>
+                        <li>
+                            <h4><i class="fa fa-hospital-o fa-fw fa-2x"></i><span> Global Poly clinic</span></h4>
+                            <h4 style="border-bottom: 1px solid #333;padding-right: 3px  "><i class="fa fa-map-marker fa-fw fa-2x"></i><span> Texas City</span>
+                                <a href="#"style="text-decoration: none;"class="pull-right"><i class="fa fa-arrow-circle-right"></i> View</a></h4>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="col-md-4 contactWidget">
+                    <h3 class="text-center">Contact us</h3>
+                    <address>
+                        <strong><i class="fa fa-home fa-fw fa-2x text-green" ></i> <span style="font-size:16px">Deemsys Inc</span></strong>
+                        <p> <i class="fa fa-map-marker fa-fw fa-2x text-green" ></i> 800, Cross Pointe Road, Suite A, Gahanna, OHIO 43230, U.S.A.<br/>
+                            <!-- <span style="padding-left: 30px !important">  </span> <br /> -->
+                            <i class="fa fa-phone fa-fw fa-2x text-green" ></i> 614-322-9928 <br />
+                            <i class="fa fa-envelope fa-fw fa-2x text-green" ></i><a href="#" style="text-decoration: none;"> support@deemsysinc.com</a> </p>
+                    </address>
+                    <hr style="margin-top:0px;margin-bottom: 5px; "class="dark-border"/>
+                    <ul class="socialNetwork pull-left">
+                        <li style="width: auto">Deemsys Inc &nbsp;</li>
+                         <li><a href="https://www.facebook.com/pages/Deemsys-Software-Solution-Provider/222802487893459" target="_blank" class="fa fa-facebook socialIcon tips"  title="follow us on Facebook"><span>facebook</span></a></li>
+                        <li><a href="https://twitter.com/deemsys" target="_blank" class="fa fa-twitter socialIcon tips"  title="follow us on Twitter"><span>twitter</span></a></li>
+                        <li><a href="https://plus.google.com/u/0/106354276736874595848/posts" target="_blank" class="fa fa-google-plus socialIcon tips"  title="follow us on Google +"><span>google +</span></a></li>
+                        <li><a href="https://in.linkedin.com/pub/deemsys-inc/85/637/61" target="_blank" class="fa fa-linkedin socialIcon tips"  title="follow us on Linkedin"><span>linkedin</span></a></li>
+                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section  id="footerRights">
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="innerBg">
+                        <p>Copyright © 2016 Deemsys Inc/ All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+<!-- End footer -->
+</div>
+<!-- global wrapper -->
+<!-- End Document
+
+    ================================================== -->
+    
+ 
+<script>
+    $( ".accordion-toggle" ).click(function() {
+        $('.accordion-toggle').removeClass(" active");
+        $( this ).addClass( " active" );
+
+    });
+
+</script>
+<script type="text/javascript" src="/resources/js/jquery-ui-1.8.23.custom.min.js"></script>
+
+<!-- third party plugins  -->
+<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap-carousel-ie.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.hoverdir.js"></script>
+<!-- jQuery KenBurn Slider  -->
+<script type="text/javascript" src="resources/js/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.themepunch.revolution.min.js"></script> 
+<!--Date time picker-->
+<script type="text/javascript" src="/resources/js/datetime/moment.js"></script>
+<script type="text/javascript" src="/resources/js/datetime/datetimepicker.js"></script>
+
+
+<!-- Custom  -->
+<script type="text/javascript" src="/resources/js/main.js"></script>
+
+<!-- For Validation -->
+<script type="text/javascript" src="/resources/js/validation.js"></script>
+<script type="text/javascript" 	src="/resources/js/validation/common-validation-functions.js"></script>
+
+<script>
+
+    var monkeyList = new List('test-list', {
+        valueNames: ['name','year' ],
+        page: 8,
+        plugins: [ListPagination({})]
+    });//@ sourceURL=pen.js
+    var userList = new List('users', options);
+</script>
+<script>
+    $(document).ready(function() {
+
+        $('.social-ehr').hover(
+                function() {
+                    $(this).find('.shutter').stop(true, true).animate({
+                                bottom: '-36px'
+                            },
+                            {
+                                duration: 300,
+                                easing: 'easeOutBounce'
+                            });
+                },
+                function () {
+                    $(this).find('.shutter').stop(true, true).animate({
+                                bottom: 0
+                            },
+                            {
+                                duration: 300,
+                                easing: 'easeOutBounce'
+                            });
+                }
+        );
+
+    });
+</script>
+<!-- Social Networs -->
+<!-- FaceBook -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- LinkedIn  -->
+<script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+<!-- Google Plus -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- Twitter -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+   
+    
+</body>
+</html>

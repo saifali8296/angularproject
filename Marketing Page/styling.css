@@ -1,0 +1,24 @@
+* {
+    margin:0
+}
+.img{
+    padding: 5%;
+    height:90%;
+    width:90%;
+}
+.keyfeature{
+   font-family:"timesnewroman";
+    font-size:25px;
+    color:#33D685;
+}
+.glyp{
+  font-size:25px;
+    color:#33D685;
+    border: none;
+}
+.superadmin{
+    color:#33D685;
+    font-size:36px;
+    text-align:center;
+    border: none;
+}
